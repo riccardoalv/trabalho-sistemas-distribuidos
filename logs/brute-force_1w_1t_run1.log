@@ -1,0 +1,56 @@
+
+▶️  Starting brute-force_1w_1t_run1
+
+🔹 Query: "love and friendship"  (10 reqs)
+
+▶️  Starting brute-force_1w_1t_run1
+
+🔹 Query: "love and friendship"  (10 reqs)
+[love and friendship] 
+[love and friendship] Summary:
+[love and friendship]   Total:	123.5585 secs
+[love and friendship]   Slowest:	12.6613 secs
+[love and friendship]   Fastest:	12.1380 secs
+[love and friendship]   Average:	12.3558 secs
+[love and friendship]   Requests/sec:	0.0809
+[love and friendship]   
+[love and friendship]   Total data:	270 bytes
+[love and friendship]   Size/request:	27 bytes
+[love and friendship] 
+[love and friendship] Response time histogram:
+[love and friendship]   12.138 [1]	|■■■■■■■■■■■■■■■■■■■■
+[love and friendship]   12.190 [1]	|■■■■■■■■■■■■■■■■■■■■
+[love and friendship]   12.243 [1]	|■■■■■■■■■■■■■■■■■■■■
+[love and friendship]   12.295 [0]	|
+[love and friendship]   12.347 [2]	|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+[love and friendship]   12.400 [2]	|■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+[love and friendship]   12.452 [1]	|■■■■■■■■■■■■■■■■■■■■
+[love and friendship]   12.504 [0]	|
+[love and friendship]   12.557 [1]	|■■■■■■■■■■■■■■■■■■■■
+[love and friendship]   12.609 [0]	|
+[love and friendship]   12.661 [1]	|■■■■■■■■■■■■■■■■■■■■
+[love and friendship] 
+[love and friendship] 
+[love and friendship] Latency distribution:
+[love and friendship]   10% in 12.1829 secs
+[love and friendship]   25% in 12.3167 secs
+[love and friendship]   50% in 12.3568 secs
+[love and friendship]   75% in 12.5543 secs
+[love and friendship]   90% in 12.6613 secs
+[love and friendship]   0% in 0.0000 secs
+[love and friendship]   0% in 0.0000 secs
+[love and friendship] 
+[love and friendship] Details (average, fastest, slowest):
+[love and friendship]   DNS+dialup:	0.0010 secs, 12.1380 secs, 12.6613 secs
+[love and friendship]   DNS-lookup:	0.0007 secs, 0.0006 secs, 0.0010 secs
+[love and friendship]   req write:	0.0001 secs, 0.0000 secs, 0.0001 secs
+[love and friendship]   resp wait:	12.3546 secs, 12.1369 secs, 12.6601 secs
+[love and friendship]   resp read:	0.0001 secs, 0.0001 secs, 0.0004 secs
+[love and friendship] 
+[love and friendship] Status code distribution:
+[love and friendship]   [200]	10 responses
+[love and friendship] 
+[love and friendship] 
+[love and friendship] 
+
+🔹 Query: "to be or not to be"  (10 reqs)

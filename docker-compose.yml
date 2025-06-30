@@ -1,0 +1,85 @@
+version: "3.9"
+
+volumes:
+  prometheus_data: {}
+  grafana_data: {}
+
+networks:
+  monitoring:
+  search-net:
+
+services:
+  worker:
+    build: ./worker
+    networks:
+      - search-net
+      - monitoring
+    environment:
+      - THREADS_PER_WORKER=${THREADS_PER_WORKER:-4}
+      - SEARCH_ALGORITHM=${SEARCH_ALGORITHM:-brute-force}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/metrics"]
+      interval: 5s
+      retries: 3
+    volumes:
+      - ./corpus:/data:ro
+
+    deploy:
+      replicas: ${WORKERS:-4}
+      resources:
+        limits:
+          cpus: "${WORKER_CPU_LIMIT:-4.0}"
+          memory: "${WORKER_MEM_LIMIT:-512M}"
+        reservations:
+          cpus: "0.25"
+          memory: 128M
+
+  coordinator:
+    build: ./coordinator
+    networks:
+      - search-net
+      - monitoring
+    environment:
+      - WORKERS=http://worker:8000
+    depends_on:
+      worker:
+        condition: service_healthy
+    volumes:
+      - ./corpus:/data:ro
+    ports:
+      - "8080:8080"
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    restart: unless-stopped
+    networks: [monitoring]
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks: [monitoring]
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    pid: "host"
+    ports:
+      - "9100:9100"
+    networks: [monitoring]
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    networks: [monitoring]
